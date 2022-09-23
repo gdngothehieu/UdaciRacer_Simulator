@@ -77,7 +77,7 @@ const delay = async (ms) => {
 
 // ^ PROVIDED CODE ^ DO NOT REMOVE
 
-// This async function controls the flow of the race, add the logic and error handling
+// This async const controls the flow of the race, add the logic and error handling
 const handleCreateRace = async () => {
   const { player_id } = store;
   const { track_id } = store;
@@ -141,7 +141,7 @@ const runCountdown = async () => {
   }
 };
 
-function handleSelectPodRacer(target) {
+const handleSelectPodRacer = (target) => {
   const selectedRacerId = target.id;
 
   // remove class selected from all racer options
@@ -154,9 +154,9 @@ function handleSelectPodRacer(target) {
   target.classList.add("selected");
   updateStore({ player_id: selectedRacerId });
   toggleStartRaceButton();
-}
+};
 
-function handleSelectTrack(target) {
+const handleSelectTrack = (target) => {
   const selectedTrackId = target.id;
 
   // remove class selected from all track options
@@ -168,14 +168,14 @@ function handleSelectTrack(target) {
   target.classList.add("selected");
   updateStore({ track_id: selectedTrackId });
   toggleStartRaceButton();
-}
+};
 
-function handleAccelerate() {
+const handleAccelerate = () => {
   const { race_id } = store;
   accelerate(race_id);
-}
+};
 
-function getProgresses(positions) {
+const getProgresses = (positions) => {
   const progresses = positions.map((position) => {
     return {
       progress: Math.round((parseInt(position.segment) / 201).toFixed(2) * 100),
@@ -184,9 +184,9 @@ function getProgresses(positions) {
     };
   });
   return progresses;
-}
+};
 
-function toggleStartRaceButton() {
+const toggleStartRaceButton = () => {
   const submitButton = document.getElementById("submit-create-race");
   const { player_id, track_id } = store;
   if (player_id && track_id) {
@@ -194,20 +194,20 @@ function toggleStartRaceButton() {
   } else {
     submitButton.disabled = true;
   }
-}
+};
 
 // HTML VIEWS ------------------------------------------------
 // Provided code - do not remove
 
-function renderRacerCars(racers) {
+const renderRacerCars = (racers) => {
   if (!racers.length) {
     return ` <h4>Loading Racers...</4> `;
   }
   const results = racers.map(renderRacerCard).join("");
   return ` <ul id="racers"> ${results} </ul>`;
-}
+};
 
-function renderRacerCard(racer) {
+const renderRacerCard = (racer) => {
   const { id, driver_name, top_speed, acceleration, handling } = racer;
   return ` <li class="card_racer" id="${id}" 
                  style="background-image: url('../assets/images/${driver_name}.png');background-size: cover">
@@ -218,9 +218,9 @@ function renderRacerCard(racer) {
 			<p>handling: ${handling}</p>
 			</div>
 		    </li> `;
-}
+};
 
-function renderTrackCards(tracks) {
+const renderTrackCards = (tracks) => {
   if (!tracks.length) {
     return ` <h4>Loading Tracks...</4> `;
   }
@@ -228,9 +228,9 @@ function renderTrackCards(tracks) {
     .map((track, index) => renderTrackCard(track, index))
     .join("");
   return ` <ul id="tracks">${results} </ul>`;
-}
+};
 
-function renderTrackCard(track, i) {
+const renderTrackCard = (track, i) => {
   const { id, name } = track;
   return ` <li id=${id} class="card_track" style="background-image: url('../assets/images/${
     i + 1
@@ -238,13 +238,13 @@ function renderTrackCard(track, i) {
                 >
                 <div class="card__overlay"> <h3>${name}</h3></div>
   </li>`;
-}
+};
 
-function renderCountdown(count) {
+const renderCountdown = (count) => {
   return ` <h2>Race Starts In...</h2> <p id="big-numbers">${count}</p> `;
-}
+};
 
-function renderRaceStartView(track) {
+const renderRaceStartView = (track) => {
   return `
 		<header>
 			<h1>Race:${track.name}</h1>
@@ -275,9 +275,9 @@ function renderRaceStartView(track) {
         <p>Designed and created by Benedikt Michel. Based on starter code provided by Udacity.</p>
     </footer>
 	`;
-}
+};
 
-function resultsView(positions) {
+const resultsView = (positions) => {
   positions.sort((a, b) => (a.final_position > b.final_position ? 1 : -1));
   return `
 		<header>
@@ -291,9 +291,9 @@ function resultsView(positions) {
             <p>Designed and created by Benedikt Michel. Based on starter code provided by Udacity.</p>
          </footer>
 	`;
-}
+};
 
-function raceProgress(positions) {
+const raceProgress = (positions) => {
   const userPlayer = positions.find((e) => e.id == store.player_id);
   userPlayer.driver_name += " (you)";
 
@@ -306,16 +306,16 @@ function raceProgress(positions) {
     })
     .join(" ");
   return `  <h3>Leaderboard</h3> <section id="leaderBoard__positions"> ${results} </section>  `;
-}
+};
 
-function renderAt(element, html) {
+const renderAt = (element, html) => {
   const node = document.querySelector(element);
   node.innerHTML = html;
-}
+};
 
 // ^ Provided code ^ do not remove
 
-function renderProgresses(progresses) {
+const renderProgresses = (progresses) => {
   const progressBars = progresses
     .map((progress) => {
       return `
@@ -329,12 +329,12 @@ function renderProgresses(progresses) {
     })
     .join(" ");
   return ` <div class="progressContainer">  ${progressBars} </div> `;
-}
+};
 
 // API CALLS ------------------------------------------------
 const SERVER = "http://localhost:8000";
 
-function defaultFetchOpts() {
+const defaultFetchOpts = () => {
   return {
     mode: "cors",
     headers: {
@@ -342,23 +342,23 @@ function defaultFetchOpts() {
       "Access-Control-Allow-Origin": SERVER,
     },
   };
-}
+};
 
-function getTracks() {
+const getTracks = () => {
   const tracks = fetch(`${SERVER}/api/tracks`)
     .then((res) => res.json())
     .catch((err) => console.error("Problem with fetching tracks::", err));
   return tracks;
-}
+};
 
-function getRacers() {
+const getRacers = () => {
   const cars = fetch(`${SERVER}/api/cars`)
     .then((res) => res.json())
     .catch((err) => console.error("Problem with fetching cars::", err));
   return cars;
-}
+};
 
-function createRace(player_id, track_id) {
+const createRace = (player_id, track_id) => {
   // create new race with selected racer and track id combination
   // returns {ID: 8, Track: {id: 1, name: "Track 1",…}, PlayerID: 4,…}
   // !!! bug, stored race is available via races/id - 1, in this case /7
@@ -374,17 +374,17 @@ function createRace(player_id, track_id) {
   })
     .then((res) => res.json())
     .catch((err) => console.error("Problem with createRace request::", err));
-}
+};
 
-function getRace(id) {
+const getRace = (id) => {
   id = id - 1; // bug in API!
   const race = fetch(`${SERVER}/api/races/${id}`)
     .then((res) => res.json())
     .catch((err) => console.error("Problem with get race request::", err));
   return race;
-}
+};
 
-function startRace(id) {
+const startRace = (id) => {
   id = id - 1; // bug in API!
   return fetch(`${SERVER}/api/races/${id}/start`, {
     method: "POST",
@@ -392,9 +392,9 @@ function startRace(id) {
   })
     .then(() => "")
     .catch((err) => console.error("Problem with startRace request::", err));
-}
+};
 
-function accelerate(id) {
+const accelerate = (id) => {
   id = id - 1; // bug in API!
   return fetch(`${SERVER}/api/races/${id}/accelerate`, {
     method: "POST",
@@ -402,4 +402,4 @@ function accelerate(id) {
   })
     .then(() => "")
     .catch((err) => console.error("Problem with accelerate request::", err));
-}
+};
