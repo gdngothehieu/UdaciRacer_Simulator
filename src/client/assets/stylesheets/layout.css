@@ -12,7 +12,6 @@ body {
 }
 
 header {
-    background-image: url('../images/banner.png');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -28,14 +27,13 @@ header {
 main {
     display: flex;
     justify-content: center;
-    background-color: var(--app-grey);
+    background-color: white;
     padding-top: 10px;
     min-height: 70vh;
 }
 
 footer {
     padding: 6px;
-    background-color: var(--app-green);
     text-align: center;
 }
 

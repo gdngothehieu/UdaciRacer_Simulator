@@ -210,7 +210,6 @@ const renderRacerCars = (racers) => {
 const renderRacerCard = (racer) => {
   const { id, driver_name, top_speed, acceleration, handling } = racer;
   return ` <li class="card_racer" id="${id}" 
-                 style="background-image: url('../assets/images/${driver_name}.png');background-size: cover">
                  <div class="card__overlay">
 			<h3>${driver_name}</h3>
 			<p>speed: ${top_speed}</p>
@@ -232,11 +231,9 @@ const renderTrackCards = (tracks) => {
 
 const renderTrackCard = (track, i) => {
   const { id, name } = track;
-  return ` <li id=${id} class="card_track" style="background-image: url('../assets/images/${
-    i + 1
-  }.png');background-size: cover"
+  return ` <li id=${id} class="card_track" 
                 >
-                <div class="card__overlay"> <h3>${name}</h3></div>
+                <div class="card__overlay" style="color:black;"> <h3>${name}</h3></div>
   </li>`;
 };
 
@@ -247,7 +244,7 @@ const renderCountdown = (count) => {
 const renderRaceStartView = (track) => {
   return `
 		<header>
-			<h1>Race:${track.name}</h1>
+			<h1 style="color:black">Race:${track.name}</h1>
 		</header>
 		
 		<main id="progressMain">
@@ -272,7 +269,6 @@ const renderRaceStartView = (track) => {
             </section>
 		</main>
 		<footer>
-        <p>Designed and created by Benedikt Michel. Based on starter code provided by Udacity.</p>
     </footer>
 	`;
 };
@@ -288,7 +284,6 @@ const resultsView = (positions) => {
 			<a class="button" href="/race">Start a new Race</a>
 		</main>
 		<footer>
-            <p>Designed and created by Benedikt Michel. Based on starter code provided by Udacity.</p>
          </footer>
 	`;
 };
