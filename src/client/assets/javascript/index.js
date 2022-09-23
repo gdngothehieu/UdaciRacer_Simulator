@@ -357,30 +357,40 @@ const createRace = (player_id, track_id) => {
     .catch((err) => console.error("Problem with createRace request::", err));
 };
 
-const getRace = (id) => {
-  id = id - 1; // bug in API!
-  const race = fetch(`${SERVER}/api/races/${id}`)
-    .then((res) => res.json())
-    .catch((err) => console.error("Problem with get race request::", err));
-  return race;
+const getRace = async (id) => {
+  try {
+    let raceDataResponse = await fetch(`${SERVER}/api/races/${id - 1}`);
+    raceDataResponse = await raceDataResponse.json();
+
+    return raceDataResponse;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
-const startRace = (id) => {
-  id = id - 1; // bug in API!
-  return fetch(`${SERVER}/api/races/${id}/start`, {
-    method: "POST",
-    ...defaultFetchOpts(),
-  })
-    .then(() => "")
-    .catch((err) => console.error("Problem with startRace request::", err));
+const startRace = async (id) => {
+  try {
+    let raceDataResponse = await fetch(`${SERVER}/api/races/${id - 1}/start`, {
+      method: "POST",
+      ...defaultFetchOpts(),
+    });
+    return raceDataResponse;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
-const accelerate = (id) => {
-  id = id - 1; // bug in API!
-  return fetch(`${SERVER}/api/races/${id}/accelerate`, {
-    method: "POST",
-    ...defaultFetchOpts(),
-  })
-    .then(() => "")
-    .catch((err) => console.error("Problem with accelerate request::", err));
+const accelerate = async (id) => {
+  try {
+    let raceDataResponse = await fetch(
+      `${SERVER}/api/races/${id - 1}/accelerate`,
+      {
+        method: "POST",
+        ...defaultFetchOpts(),
+      }
+    );
+    return raceDataResponse;
+  } catch (e) {
+    console.log(e);
+  }
 };
