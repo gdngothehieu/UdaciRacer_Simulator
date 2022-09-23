@@ -212,9 +212,9 @@ const renderRacerCard = (racer) => {
   return ` <li class="card_racer" id="${id}" 
                  <div class="card__overlay">
 			<h3>${driver_name}</h3>
-			<p>speed: ${top_speed}</p>
-			<p>acceleration: ${acceleration}</p>
-			<p>handling: ${handling}</p>
+			<p>Speed: ${top_speed}</p>
+			<p>Acceleration: ${acceleration}</p>
+			<p>Handling: ${handling}</p>
 			</div>
 		    </li> `;
 };
@@ -247,13 +247,18 @@ const renderRaceStartView = (track) => {
 			<h1 style="color:black">Race:${track.name}</h1>
 		</header>
 		
-		<main id="progressMain">
-            <section id="instructions">
-                <h2>Directions</h2>
-                <p>Click the button as fast as you can to make your racer go faster!</p>
-            </section>
-            <section id="raceUpdates">
-            <div>
+		<main id="progress_main">
+      <div>
+      
+
+      <section id="instructions">
+      <h2>Directions</h2>
+      <p>Click the button as fast as you can to make your racer go faster!</p>
+    </section>
+      </div>
+      <div>
+      <section id="raceUpdates">
+            <div style="display:flex;">
                 <section id="accelerate">
                     <button id="gas-peddle">Click Me!</button>
                 </section>
@@ -262,11 +267,8 @@ const renderRaceStartView = (track) => {
                     ${renderCountdown(3)}
                 </section>
             </div>
-            <div>
-                <section id="raceProgress">
-                </section>
-            </div>
-            </section>
+      </div>
+            
 		</main>
 		<footer>
     </footer>
@@ -300,7 +302,7 @@ const raceProgress = (positions) => {
       return `  <p>${count++} - ${p.driver_name}</p> `;
     })
     .join(" ");
-  return `  <h3>Leaderboard</h3> <section id="leaderBoard__positions"> ${results} </section>  `;
+  return `  <h3>Leaderboard</h3> <section id="leaderBoard__positions" style="color:"black"> ${results} </section>  `;
 };
 
 const renderAt = (element, html) => {
@@ -309,22 +311,6 @@ const renderAt = (element, html) => {
 };
 
 // ^ Provided code ^ do not remove
-
-const renderProgresses = (progresses) => {
-  const progressBars = progresses
-    .map((progress) => {
-      return `
-                <div class="progressBar" style="left: ${
-                  progress.progress - 2
-                }%; background-image:  url('../assets/images/${
-        progress.racer
-      }.png')">           
-                </div>
-            `;
-    })
-    .join(" ");
-  return ` <div class="progressContainer">  ${progressBars} </div> `;
-};
 
 // API CALLS ------------------------------------------------
 const SERVER = "http://localhost:8000";

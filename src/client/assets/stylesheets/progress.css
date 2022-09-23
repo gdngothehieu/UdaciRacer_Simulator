@@ -3,13 +3,14 @@
 header {
 }
 
-#progressMain {
+#progress_main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: start;
 }
 #instructions {
+    min-width:33%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -17,12 +18,16 @@ header {
 }
 
 #raceProgress {
+    min-width:33%;
+
     display: flex;
     justify-content: center;
     padding: 25px;
 }
 
 #leaderBoard {
+    min-width:33%;
+
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,13 +35,14 @@ header {
 }
 
 #leaderBoard p {
-    color: white;
+    color: black;
 }
 
 #leaderBoard__positions {
     display: flex;
     flex-direction: column;
     align-items: start;
+    color: black;
 }
 #raceUpdates {
     display: flex;
@@ -47,6 +53,7 @@ header {
 
 #accelerate {
     display: flex;
+    margin-right: 100px;
     flex-direction: column;
     align-items: center;
     text-align: center;
@@ -57,7 +64,7 @@ section#accelerate button {
     width: 100px;
     margin: 30px auto;
     border-radius: 180%;
-    background-color: green;
+    background-color: white;
     cursor: pointer;
 }
 
