@@ -357,40 +357,43 @@ const defaultFetchOpts = () => {
 };
 // TODO - Make a fetch call (with error handling!) to each of the following API endpoints
 
-const getTracks = () => {
+const getTracks = async () => {
   // GET request to `${SERVER}/api/tracks`
   try {
-  } catch (e) {}
-  const tracks = fetch(`${SERVER}/api/tracks`)
-    .then((res) => res.json())
-    .catch((err) => console.error("Problem with fetching tracks::", err));
-  return tracks;
+    let tracksDataResponse = await fetch(`${SERVER}/api/tracks`);
+    tracksDataResponse = await tracksDataResponse.json();
+    return tracksDataResponse;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
-const getRacers = () => {
+const getRacers = async () => {
   try {
-  } catch (e) {}
-  const cars = fetch(`${SERVER}/api/cars`)
-    .then((res) => res.json())
-    .catch((err) => console.error("Problem with fetching cars::", err));
-  return cars;
+    let carsDataResponse = await fetch(`${SERVER}/api/cars`);
+    carsDataResponse = await carsDataResponse.json();
+    return carsDataResponse;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
-const createRace = (player_id, track_id) => {
+const createRace = async (player_id, track_id) => {
   try {
-  } catch (e) {}
-  player_id = parseInt(player_id);
-  track_id = parseInt(track_id);
-  const body = { player_id, track_id };
-
-  return fetch(`${SERVER}/api/races`, {
-    method: "POST",
-    ...defaultFetchOpts(),
-    dataType: "jsonp",
-    body: JSON.stringify(body),
-  })
-    .then((res) => res.json())
-    .catch((err) => console.error("Problem with createRace request::", err));
+    player_id = parseInt(player_id);
+    track_id = parseInt(track_id);
+    const body = { player_id, track_id };
+    let racesDataResponse = await fetch(`${SERVER}/api/races`, {
+      method: "POST",
+      ...defaultFetchOpts(),
+      dataType: "jsonp",
+      body: JSON.stringify(body),
+    });
+    racesDataResponse = await racesDataResponse.json();
+    return racesDataResponse;
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 const getRace = async (id) => {
